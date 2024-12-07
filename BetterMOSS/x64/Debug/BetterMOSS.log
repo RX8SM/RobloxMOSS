@@ -1,0 +1,6 @@
+﻿  ProcLogger.cpp
+C:\Users\comma\source\repos\BetterMOSS\BetterMOSS\Header Files\ProcLogger\ProcLogger.cpp(16,23): warning C4244: '=': conversion from 'DWORD' to 'uint16_t', possible loss of data
+  core.cpp
+  Generating Code...
+core.obj : error LNK2019: unresolved external symbol "wchar_t const * __cdecl __get_fP(unsigned short)" (?__get_fP@@YAPEB_WG@Z) referenced in function main
+C:\Users\comma\source\repos\BetterMOSS\x64\Debug\BetterMOSS.exe : fatal error LNK1120: 1 unresolved externals
