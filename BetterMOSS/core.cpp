@@ -26,6 +26,7 @@ int main() {
     if (msg == IDYES) {
         std::cout << "Scanning..." << std::endl;
         std::cout << "If you want to stop scanning just close this program." << std::endl;
+        std::cout << "Errors occuring for system files in logs is normal." << std::endl; 
         Start();
     }
 

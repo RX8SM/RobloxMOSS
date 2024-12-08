@@ -11,7 +11,7 @@ std::string __gt_SHA256(const std::wstring& filePath) {
 
     HANDLE hFile = CreateFile(filePath.c_str(), GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
     if (hFile == INVALID_HANDLE_VALUE) {
-        std::cerr << "Failed to open file. Code: " << GetLastError() << std::endl;
+        // std::cerr << "Failed to open file. Code: " << GetLastError() << std::endl;
         return "";
     }
 
@@ -68,12 +68,12 @@ inline const wchar_t* __get_fP(uint32_t PID) {
 
     HANDLE fileHandle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, PID);
     if (fileHandle == NULL) {
-        std::wcerr << L"Failed to open process " << PID << L". Code: " << GetLastError() << std::endl;
+        // std::wcerr << L"Failed to open process " << PID << L". Code: " << GetLastError() << std::endl;
         return L"";
     }
 
     if (GetModuleFileNameExW(fileHandle, NULL, buffer, _countof(buffer)) == 0) {
-        std::wcerr << L"Failed to get file path for PID: " << PID << L". Code: " << GetLastError() << std::endl;
+        // std::wcerr << L"Failed to get file path for PID: " << PID << L". Code: " << GetLastError() << std::endl;
         CloseHandle(fileHandle);
         return L"";
     }
@@ -101,6 +101,7 @@ void __fastcall logProcesses(void) {
             if (Process32First(hSnapshot, &pe32)) {
                 do {
                     uint32_t PID = pe32.th32ProcessID;
+                    std::wstring szExe = pe32.szExeFile;
                     uint32_t RobloxPID = 0;
                     std::wstring GameDetection;
                     if (seenPIDs.find(PID) == seenPIDs.end()) {
@@ -128,7 +129,9 @@ void __fastcall logProcesses(void) {
                         std::string SHA256Hash = __gt_SHA256(filePath);
                         std::wstring signatureResult = VerifyDigitalSignature(filePath);
 
-                        std::wstring processData = L"PID: " + std::to_wstring(PID) + L" | File Path: " + filePath + L"\n";
+
+
+                        std::wstring processData = L"PID: " + std::to_wstring(PID) + L" | File Path: " + filePath + L" | " + szExe + L"\n";
                         std::string hashData = "File hash: " + SHA256Hash;
                         std::wstring wHashData(hashData.begin(), hashData.end());
                         std::wstring Data = wHashData + L" | " + timeW + signatureResult + processData + GameDetection;
