@@ -1,4 +1,4 @@
-BetterMOSS or, more like RobloxMOSS is a program inspired by MOSS and specifically meant for Roblox (https://nohope.eu).
+BetterMOSS or, more like RobloxMOSS is a program inspired by MOSS (https://nohope.eu) and specifically meant for Roblox.
 
 It is alternatively better than MOSS for Roblox.
 
